@@ -1,1 +1,1 @@
-# CCS2210-week-2-inclass-code
+# Week 2 in-class code examples
