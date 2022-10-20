@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>In-class Code Examples - Regular expressions but also events</title>
+</head>
+<body>
+
+    <h2>Regular expressions but also events</h2>
+    
+    <p>Enter email address below:</p>
+    <textarea autofocus id="addr" onclick="return validateForm1()"></textarea><br>
+    <textarea id="addr_new"></textarea>
+    
+    <script>
+
+        // Example 1 - simple pattern matching (no modifiers, metacharacters, quantifiers)
+        let text = "We will rock, We will rock you"
+        let result1 = text.search(/we/);
+        console.log(result1);
+       
+        // Example 2 - pattern matching - multiple modifiers
+        let re1 = new RegExp('rOck','gi');
+        let result2 = text.search(re1);
+        console.log(result2);
+     
+        // Example 3 - pattern matching with metacharacters, quantifiers
+        // Also demonstrates function invocation in response to DOM events
+        function validateForm1() {
+            let addr =  document.getElementById("addr").value;
+            console.log(addr);
+            let result3 = addr.search(/^\S+@\S+[.]\S+$/);
+            console.log(result3);
+        }
+        
+        // Same effect as above but now an event listener is explicitly added to the 2nd textarea
+        let addr_element = document.getElementById("addr_new");
+        addr_element.addEventListener("mouseover", validateForm2);
+
+        // A sligthlty altered version of validateForm1
+        function validateForm2() {
+            const pattern = /^\S+@\S+[.]\S+$/
+            let result3 = pattern.test(document.getElementById("addr_new").value);
+            console.log(result3);
+        }
+        
+    </script>
+</body>
+</html>
